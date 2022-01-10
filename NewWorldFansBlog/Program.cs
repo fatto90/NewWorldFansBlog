@@ -1,5 +1,6 @@
 using NewWorldFansBlog.Commands;
 using NewWorldFansBlog.Commands.Models;
+using NewWorldFansBlog.Commands.Requests;
 using NewWorldFansBlog.Models;
 using NewWorldFansBlog.Utilities;
 
@@ -8,8 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IAPIRequestClient<List<PostModel>>, APIRequestClient<List<PostModel>>>();
-builder.Services.AddScoped<ICommand<GetPostsRequest, PostsViewModel>, GetPostsHandler>();
+builder.Services.AddSingleton<IAPIRequestClient<List<PostModel>>, APIRequestClient<List<PostModel>>>();
+builder.Services.AddSingleton<ICommand<GetPostsRequest, PostsViewModel>, GetPostsHandler>();
+builder.Services.AddSingleton<IAPIRequestClient<RedditPostContainerModel>, APIRequestClient<RedditPostContainerModel>>();
+builder.Services.AddSingleton<ICommand<GetRedditPostsRequest, RedditPostsViewModel>, GetRedditPostsHandler>();
 
 var app = builder.Build();
 

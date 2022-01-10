@@ -1,4 +1,4 @@
-﻿namespace NewWorldFansBlog.Commands
+﻿namespace NewWorldFansBlog.Commands.Requests
 {
     public class GetPostsRequest
     {
