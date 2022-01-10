@@ -48,9 +48,9 @@
             <div class="row mb-4">
                 <!-- Pager-->
                 <div class="col-6 col-md-4 mb-2">
-                    @if(Model?.CurrentPage > 1)
+                    @if(Model?.CurrentPage > 1 && Model.Posts.Count() > 1)
                     {
-                       <a class="btn btn-primary text-uppercase" href="@Url.Action("Index", "RedditPosts", new { page = Model!.CurrentPage - 1, direction = DirectionType.Before, postName = Model?.Posts?.FirstOrDefault()?.Name })"><span class="d-block d-sm-none">←</span> Previous Posts</a>
+                       <a class="btn btn-primary text-uppercase" href="@Url.Action("Index", "RedditPosts", new { page = Model!.CurrentPage - 1, direction = DirectionType.Before, postName = Model?.Posts?[1]?.Name })"><span class="d-block d-sm-none">←</span> Previous Posts</a>
                     }
                 </div>
                 <div class="col-md-4 d-none d-sm-block"></div>
