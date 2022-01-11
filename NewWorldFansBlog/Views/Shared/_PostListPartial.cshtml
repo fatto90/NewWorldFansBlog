@@ -1,0 +1,25 @@
+﻿@using System.Globalization
+@model List<PostViewModel>
+
+
+@if(Model?.Any() ?? false){
+    @foreach(var post in Model!)
+    {
+        <!-- Post preview-->
+        <div class="post-preview">
+            <a href="@post.Url" target="_blank">
+                @*<h2 class="post-title">@Html.Raw(post.Content)</h2>*@
+                <h3 class="post-subtitle">@Html.Raw(post.Subtitle)</h3>
+            </a>
+            <p class="post-meta">
+                Posted by
+                <a href="#!">@post.Author</a>
+                @post.Date?.ToString("g", CultureInfo.CreateSpecificCulture("en-GB"))
+            </p>
+        </div>
+        <!-- Divider-->
+        <hr class="my-4" />
+    }
+} else {
+    <div>No posts found.</div>
+}

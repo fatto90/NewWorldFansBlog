@@ -7,5 +7,7 @@ namespace NewWorldFansBlog.Models
         public List<RedditPostModel>? Posts { get; set; }
 
         public int CurrentPage { get; set; }
+
+        public PostFilterType SelectedFilter { get; set; }
     }
 }

@@ -24,12 +24,13 @@ namespace NewWorldFansBlog.Commands
             {
                 CurrentPage = request.Page,
                 Posts = container?.Data?.Childrens.Select(x => x.Data).OrderByDescending(x => x.Date).ToList(),
+                SelectedFilter = request.SelectedFilter,
             };
         }
 
         private string GetPostsUrl(GetRedditPostsRequest request)
         {
-            string baseUrl = "https://www.reddit.com/r/newworldgame/top.json";
+            string baseUrl = $"https://www.reddit.com/r/newworldgame/{request.SelectedFilter.ToString().ToLower()}.json";
             string getRedditPostsUrl = baseUrl;
             if (!string.IsNullOrEmpty(request.PostName))
             {

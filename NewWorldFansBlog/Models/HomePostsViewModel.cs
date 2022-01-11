@@ -2,7 +2,7 @@
 
 namespace NewWorldFansBlog.Models
 {
-    public class PostsViewModel
+    public class HomePostsViewModel
     {
         public List<PostModel>? Posts { get; set; }
 

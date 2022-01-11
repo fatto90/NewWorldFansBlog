@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<IAPIRequestClient<List<PostModel>>, APIRequestClient<List<PostModel>>>();
-builder.Services.AddSingleton<ICommand<GetPostsRequest, PostsViewModel>, GetPostsHandler>();
+builder.Services.AddSingleton<ICommand<GetPostsRequest, HomePostsViewModel>, GetPostsHandler>();
 builder.Services.AddSingleton<IAPIRequestClient<RedditPostContainerModel>, APIRequestClient<RedditPostContainerModel>>();
 builder.Services.AddSingleton<ICommand<GetRedditPostsRequest, RedditPostsViewModel>, GetRedditPostsHandler>();
 

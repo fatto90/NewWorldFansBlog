@@ -9,9 +9,9 @@ namespace NewWorldFansBlog.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ICommand<GetPostsRequest, PostsViewModel> _getPostsCommand;
+        private readonly ICommand<GetPostsRequest, HomePostsViewModel> _getPostsCommand;
 
-        public HomeController(ILogger<HomeController> logger, ICommand<GetPostsRequest, PostsViewModel> getPostsCommand)
+        public HomeController(ILogger<HomeController> logger, ICommand<GetPostsRequest, HomePostsViewModel> getPostsCommand)
         {
             _logger = logger;
             _getPostsCommand = getPostsCommand;
@@ -19,7 +19,7 @@ namespace NewWorldFansBlog.Controllers
 
         public async Task<IActionResult> Index(int? page)
         {
-            PostsViewModel viewModel = await _getPostsCommand.Handle(new GetPostsRequest { Page = page ?? 1 });
+            HomePostsViewModel viewModel = await _getPostsCommand.Handle(new GetPostsRequest { Page = page ?? 1 });
             return View("Index", viewModel);
         }
 
