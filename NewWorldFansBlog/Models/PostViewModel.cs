@@ -9,5 +9,7 @@
         public string Author { get; set; }
 
         public DateTimeOffset? Date { get; set; }
+
+        public bool Pinned { get; set; }
     }
 }

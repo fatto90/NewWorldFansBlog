@@ -73,6 +73,7 @@ var applyFilter = function (selectedFilter) {
     });
 };
 
-var loadPosts = function (page, direction, postName, selectedFilter) {
+var loadPosts = function (page, direction, postName) {
+    const selectedFilter = $('.btn-light').data('filter');
     window.location.replace("/RedditPosts?page=" + page + "&direction=" + direction + "&postName=" + postName + "&selectedFilter=" + selectedFilter);
 }

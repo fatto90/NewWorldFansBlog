@@ -30,6 +30,9 @@ namespace NewWorldFansBlog.Commands.Models
 
         [JsonPropertyName("url")]
         public string? Url { get; set; }
-        
+
+        [JsonPropertyName("stickied")]
+        public bool Pinned { get; set; }
+
     }
 }

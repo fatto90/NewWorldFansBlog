@@ -27,7 +27,8 @@ namespace NewWorldFansBlog.Controllers
                 Author = x.Author,
                 Date = x.Date,
                 Subtitle = x.Title,
-                Url = x.Url
+                Url = x.Url,
+                Pinned = x.Pinned
             }).ToList();
             return PartialView("_PostListPartial", mappedPostViewModels);
         }

@@ -22,10 +22,10 @@
         <div class="row gx-2 gx-lg-3 justify-content-center">
             <div class="col-md-10 col-lg-8">
                 <p class="mb-2">Viewing: </p>
-                <button id="filterNew" onclick="applyFilter('New')" class="btn btn-@(Model.SelectedFilter == PostFilterType.New ? "" : "outline-")light rounded-3 text-uppercase p-2">New</button>
-                <button id="filterTop" onclick="applyFilter('Top')" class="btn btn-@(Model.SelectedFilter == PostFilterType.Top ? "" : "outline-")light rounded-3 text-uppercase p-2">Top</button>
-                <button id="filterBest" onclick="applyFilter('Best')" class="btn btn-@(Model.SelectedFilter == PostFilterType.Best ? "" : "outline-")light rounded-3 text-uppercase p-2">Best</button>
-                <button id="filterHot" onclick="applyFilter('Hot')" class="btn btn-@(Model.SelectedFilter == PostFilterType.Hot ? "" : "outline-")light rounded-3 text-uppercase p-2">Hot</button>
+                <button id="filterNew" onclick="applyFilter('New')" data-filter="New" class="btn btn-@(Model.SelectedFilter == PostFilterType.New ? "" : "outline-")light rounded-3 text-uppercase p-2">New</button>
+                <button id="filterTop" onclick="applyFilter('Top')" data-filter="Top" class="btn btn-@(Model.SelectedFilter == PostFilterType.Top ? "" : "outline-")light rounded-3 text-uppercase p-2">Top</button>
+                <button id="filterBest" onclick="applyFilter('Best')" data-filter="Best" class="btn btn-@(Model.SelectedFilter == PostFilterType.Best ? "" : "outline-")light rounded-3 text-uppercase p-2">Best</button>
+                <button id="filterHot" onclick="applyFilter('Hot')" data-filter="Hot" class="btn btn-@(Model.SelectedFilter == PostFilterType.Hot ? "" : "outline-")light rounded-3 text-uppercase p-2">Hot</button>
             </div>
         </div>
     </div>
@@ -34,11 +34,13 @@
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
+
             @await Html.PartialAsync("../Shared/_PostListPartial",Model?.Posts.Select(post => new PostViewModel { 
                 Author = post.Author,
                 Date = post.Date,
                 Subtitle = post.Title,
-                Url = post.Url
+                Url = post.Url,
+                Pinned = post.Pinned
             }).ToList())
             
             <div class="row mb-4">
@@ -46,14 +48,14 @@
                 <div class="col-6 col-md-4 mb-2">
                     @if(Model?.CurrentPage > 1 && Model.Posts.Count() > 1)
                     {
-                       <a class="btn btn-primary text-uppercase" onclick="loadPosts(@(Model!.CurrentPage - 1), '@DirectionType.Before', '@(Model?.Posts?[1]?.Name)', '@Model.SelectedFilter')"><span class="d-none d-sm-block">←</span> Previous Posts</a>
+                       <a class="btn btn-primary text-uppercase" onclick="loadPosts(@(Model!.CurrentPage - 1), '@DirectionType.Before', '@(Model?.Posts?[1]?.Name)')"><span class="d-none d-sm-block">←</span> Previous Posts</a>
                     }
                 </div>
                 <div class="col-md-4 d-none d-sm-block"></div>
                 <div class="col-6 col-md-4 d-flex justify-content-end">
                     @if(Model?.Posts?.Any() ?? false)
                     {
-                        <a class="btn btn-primary text-uppercase" onclick="loadPosts(@(Model!.CurrentPage + 1), '@DirectionType.After', '@(Model?.Posts?.LastOrDefault()?.Name)', '@Model.SelectedFilter')">Older Posts <span class="d-none d-sm-block">→</span></a>
+                        <a class="btn btn-primary text-uppercase" onclick="loadPosts(@(Model!.CurrentPage + 1), '@DirectionType.After', '@(Model?.Posts?.LastOrDefault()?.Name)')">Older Posts <span class="d-none d-sm-block">→</span></a>
                     }
                 </div>
             </div>

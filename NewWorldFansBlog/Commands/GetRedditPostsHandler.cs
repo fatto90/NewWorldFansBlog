@@ -20,10 +20,11 @@ namespace NewWorldFansBlog.Commands
 
             RedditPostContainerModel? container = await API.GetResponse(getRedditPostsUrl);
 
+            IEnumerable<RedditPostModel> postModelsQuery = container?.Data?.Childrens.Select(x => x.Data);
             return new RedditPostsViewModel
             {
                 CurrentPage = request.Page,
-                Posts = container?.Data?.Childrens.Select(x => x.Data).OrderByDescending(x => x.Date).ToList(),
+                Posts = postModelsQuery.OrderByDescending(x => x.Pinned).ThenByDescending(x => x.Date).ToList(),
                 SelectedFilter = request.SelectedFilter,
             };
         }
@@ -32,7 +33,7 @@ namespace NewWorldFansBlog.Commands
         {
             string baseUrl = $"https://www.reddit.com/r/newworldgame/{request.SelectedFilter.ToString().ToLower()}.json";
             string getRedditPostsUrl = baseUrl;
-            if (!string.IsNullOrEmpty(request.PostName))
+            if (!string.IsNullOrEmpty(request.PostName) && request.Page != 1)
             {
                 switch (request.Direction)
                 {
