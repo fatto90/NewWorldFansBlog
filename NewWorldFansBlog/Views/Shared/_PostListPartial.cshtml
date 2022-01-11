@@ -6,7 +6,7 @@
     @foreach(var post in Model!)
     {
         <!-- Post preview-->
-        <div class="post-preview">
+        <div class="post-preview" data-aos="fade-up">
             <a href="@post.Url" target="_blank">
                 @*<h2 class="post-title">@Html.Raw(post.Content)</h2>*@
                 <h3 class="post-subtitle">@Html.Raw(post.Subtitle)</h3>
@@ -21,5 +21,5 @@
         <hr class="my-4" />
     }
 } else {
-    <div>No posts found.</div>
+    <div data-aos="fade-up">No posts found.</div>
 }
