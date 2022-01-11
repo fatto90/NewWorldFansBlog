@@ -27,3 +27,52 @@ window.addEventListener('DOMContentLoaded', () => {
         scrollPos = currentTop;
     });
 })
+
+var applyFilter = function (selectedFilter) {
+    $.ajax({
+        url: "/RedditPosts/RenderPostList?selectedFilter=" + selectedFilter,
+        type: 'GET',
+        success: function (data) {
+            //remove all
+            $('#filterNew').removeClass('btn-outline-light');
+            $('#filterTop').removeClass('btn-outline-light');
+            $('#filterBest').removeClass('btn-outline-light');
+            $('#filterHot').removeClass('btn-outline-light');
+            $('#filterNew').removeClass('btn-light');
+            $('#filterTop').removeClass('btn-light');
+            $('#filterBest').removeClass('btn-light');
+            $('#filterHot').removeClass('btn-light');
+            switch (selectedFilter) {
+                case "New":
+                    $('#filterNew').addClass('btn-light');
+                    $('#filterTop').addClass('btn-outline-light');
+                    $('#filterBest').addClass('btn-outline-light');
+                    $('#filterHot').addClass('btn-outline-light');
+                    break;
+                case "Top":
+                    $('#filterNew').addClass('btn-outline-light');
+                    $('#filterTop').addClass('btn-light');
+                    $('#filterBest').addClass('btn-outline-light');
+                    $('#filterHot').addClass('btn-outline-light');
+                    break;
+                case "Best":
+                    $('#filterNew').addClass('btn-outline-light');
+                    $('#filterTop').addClass('btn-outline-light');
+                    $('#filterBest').addClass('btn-light');
+                    $('#filterHot').addClass('btn-outline-light');
+                    break;
+                case "Hot":
+                    $('#filterNew').addClass('btn-outline-light');
+                    $('#filterTop').addClass('btn-outline-light');
+                    $('#filterBest').addClass('btn-outline-light');
+                    $('#filterHot').addClass('btn-light');
+                    break;
+            }
+            $('#postList').replaceWith(data);
+        }
+    });
+};
+
+var loadPosts = function (page, direction, postName, selectedFilter) {
+    window.location.replace("/RedditPosts?page=" + page + "&direction=" + direction + "&postName=" + postName + "&selectedFilter=" + selectedFilter);
+}
