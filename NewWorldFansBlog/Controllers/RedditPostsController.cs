@@ -28,7 +28,8 @@ namespace NewWorldFansBlog.Controllers
                 Date = x.Date,
                 Subtitle = x.Title,
                 Url = x.Url,
-                Pinned = x.Pinned
+                Pinned = x.Pinned,
+                Name = x.Name,
             }).ToList();
             return PartialView("_PostListPartial", mappedPostViewModels);
         }
@@ -40,7 +41,7 @@ namespace NewWorldFansBlog.Controllers
                 Page = page ?? 1,
                 Direction = direction ?? DirectionType.None,
                 PostName = postName,
-                SelectedFilter = selectedFilter ?? PostFilterType.New,
+                SelectedFilter = selectedFilter ?? PostFilterType.Hot,
             };
             RedditPostsViewModel viewModel = await _getRedditPostsCommand.Handle(request);
             return viewModel;

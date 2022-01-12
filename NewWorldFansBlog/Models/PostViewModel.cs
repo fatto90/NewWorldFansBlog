@@ -11,5 +11,7 @@
         public DateTimeOffset? Date { get; set; }
 
         public bool Pinned { get; set; }
+
+        public string Name { get; set; }
     }
 }

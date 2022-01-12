@@ -6,7 +6,7 @@
         @foreach(var post in Model!)
         {
             <!-- Post preview-->
-            <div class="post-preview" data-aos="fade-up">
+            <div class="post-preview" data-aos="fade-up" data-post-name="@post.Name">
                 <a href="@post.Url" target="_blank">
                     @*<h2 class="post-title">@Html.Raw(post.Content)</h2>*@
                     <h3 class="post-subtitle">@Html.Raw(post.Subtitle)</h3>

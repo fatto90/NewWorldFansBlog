@@ -3,6 +3,8 @@
 * Copyright 2013-2021 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-clean-blog/blob/master/LICENSE)
 */
+var shouldResetPage = false;
+
 window.addEventListener('DOMContentLoaded', () => {
     let scrollPos = 0;
     const mainNav = document.getElementById('mainNav');
@@ -29,10 +31,14 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 
 var applyFilter = function (selectedFilter) {
+    const newUrl = "/RedditPosts/RenderPostList?selectedFilter=" + selectedFilter;
     $.ajax({
-        url: "/RedditPosts/RenderPostList?selectedFilter=" + selectedFilter,
+        url: newUrl,
         type: 'GET',
         success: function (data) {
+            window.history.replaceState({}, newUrl, newUrl);
+            $('#prevLink').addClass('d-none');
+            shouldResetPage = true;
             //remove all
             $('#filterNew').removeClass('btn-outline-light');
             $('#filterTop').removeClass('btn-outline-light');
@@ -73,7 +79,12 @@ var applyFilter = function (selectedFilter) {
     });
 };
 
-var loadPosts = function (page, direction, postName) {
+var loadPosts = function (page, direction) {
     const selectedFilter = $('.btn-light').data('filter');
-    window.location.replace("/RedditPosts?page=" + page + "&direction=" + direction + "&postName=" + postName + "&selectedFilter=" + selectedFilter);
+    const postName = direction === 'After' ? $('.post-preview').last().data('post-name') : $($('.post-preview')[1]).data('post-name');
+    var p = page;
+    if (shouldResetPage) {
+        p = 2;
+    }
+    window.location.replace("/RedditPosts?page=" + p + "&direction=" + direction + "&postName=" + postName + "&selectedFilter=" + selectedFilter);
 }
